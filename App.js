@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
-import { Container, Header, Title, Content, Footer, FooterTab, Button, Icon, Text } from 'native-base';
+import { Container, Header, Title, Footer, FooterTab, Button, Icon, Text } from 'native-base';
 import { createBottomTabNavigator } from 'react-navigation';
+import { Provider } from 'react-redux';
+import configureStore from './src/store';
 import { Catalog, Cart, About } from './src/screens';
 
 const RootStack = createBottomTabNavigator(
@@ -19,7 +21,6 @@ const RootStack = createBottomTabNavigator(
     initialRouteName: 'Catalog',
     tabBarPosition: "bottom",
     tabBarComponent: props => {
-      console.log(props);
       return (
         <Footer>
           <FooterTab>
@@ -42,15 +43,19 @@ const RootStack = createBottomTabNavigator(
   }
 );
 
+const store = configureStore();
+
 export default class App extends Component {
   render() {
     return (
-      <Container>
-        <Header>
-          <Title>Доставка Суши</Title>
-        </Header>
-        <RootStack />
-      </Container>
+      <Provider store={store}>
+        <Container>
+          <Header>
+            <Title>Доставка Суши</Title>
+          </Header>
+          <RootStack />
+        </Container>
+      </Provider>
     );
   }
 }
