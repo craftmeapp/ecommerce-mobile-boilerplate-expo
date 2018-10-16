@@ -50,9 +50,6 @@ export default class App extends Component {
     return (
       <Provider store={store}>
         <Container>
-          <Header>
-            <Title>Доставка Суши</Title>
-          </Header>
           <RootStack />
         </Container>
       </Provider>
