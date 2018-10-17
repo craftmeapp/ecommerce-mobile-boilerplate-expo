@@ -1,35 +1,31 @@
 import React, { Component } from 'react';
 import { Container } from 'native-base';
-import { createStackNavigator } from 'react-navigation';
+import { createSwitchNavigator } from 'react-navigation';
 import { Provider } from 'react-redux';
 import configureStore from './src/store';
-import { Preloading } from './src/screens';
+import { Preloading, Main } from './src/screens';
 
-const RootStack = createStackNavigator(
+const RootStack = createSwitchNavigator(
   {
     Preloading: {
       screen: Preloading,
     },
+    Main: {
+      screen: Main,
+    },
   },
   {
     initialRouteName: 'Preloading',
-    navigationOptions: {
-      headerMode: 'none',
-      header: null,
-    },
   }
 );
 
 const store = configureStore();
 
-export default class App extends Component {
-  render() {
-    return (
-      <Provider store={store}>
-        <Container>
-          <RootStack />
-        </Container>
-      </Provider>
-    );
-  }
-}
+const App = () => (
+  <Provider store={store}>
+    <Container>
+      <RootStack />
+    </Container>
+  </Provider>
+);
+export default App;
