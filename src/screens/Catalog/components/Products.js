@@ -20,7 +20,7 @@ export default class Products extends Component {
   }
 
   handleClick = ({ index }) => {
-    
+    this.props.navigation.navigate('Product', { product: index });
   }
 
   renderProductsList() {
@@ -29,7 +29,7 @@ export default class Products extends Component {
     const currentCategory = navigation.getParam('category');
 
     const categoryProducts = productsByCategories[currentCategory];
-    console.log(categoryProducts);
+
     if (!categoryProducts)
       return null;
 

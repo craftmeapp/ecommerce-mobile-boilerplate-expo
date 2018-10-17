@@ -24,10 +24,12 @@ const ItemContainerStyled = styled.View`
 const  ItemImageContainerStyled = styled.View`
   border-right-width: 0.5px;
   border-color: #cccccc;
+  flex: 1;
 `;
 
 const ItemContentContainerStyled = styled.View`
   margin: 10px;
+  flex: 2;
 `;
 
 export default class Item extends Component {
@@ -42,10 +44,10 @@ export default class Item extends Component {
     return (
       <TouchableOpacity onPress={this.handleClick}>
         <ItemContainerStyled>
-          <ItemImageContainerStyled style={{flex: 1 }}>
+          <ItemImageContainerStyled>
             <ImageStyled source={{uri: getProductImageURL({ id, size })}} resizeMode="contain" />
           </ItemImageContainerStyled>
-          <ItemContentContainerStyled style={{flex: 2}}>
+          <ItemContentContainerStyled>
             <View style={{flex: 1}}>
               <TextStyled>
                 {title}
