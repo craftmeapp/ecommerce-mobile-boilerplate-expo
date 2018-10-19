@@ -1,10 +1,11 @@
 import { handleActions } from 'redux-actions';
 
 import {
-  READ_PRODUCTS_REQUEST,
-  READ_PRODUCTS_FAILURE,
-  READ_PRODUCTS_SUCCESS,
-} from '../../actions/products/actionTypes';
+  READ_REGIONS_REQUEST,
+  READ_REGIONS_FAILURE,
+  READ_REGIONS_SUCCESS,
+  SET_CURRENT_REGION,
+} from '../../actions/regions/actionTypes';
 
 const defaultState = {
   items: [],
@@ -12,10 +13,11 @@ const defaultState = {
   isRequest: false,
   isFailure: false,
   error: null,
+  currentRegion: null,
 };
 
 const reducer = handleActions({
-  [READ_PRODUCTS_SUCCESS]: (state, action) => (
+  [READ_REGIONS_SUCCESS]: (state, action) => (
     {
       ...state,
       items: action.payload.data.data,
@@ -25,7 +27,7 @@ const reducer = handleActions({
       error: null,
     }
   ),
-  [READ_PRODUCTS_FAILURE]: (state, action) => (
+  [READ_REGIONS_FAILURE]: (state, action) => (
     {
       ...state,
       isAvailable: false,
@@ -34,13 +36,19 @@ const reducer = handleActions({
       error: action.payload.error,
     }
   ),
-  [READ_PRODUCTS_REQUEST]: state => (
+  [READ_REGIONS_REQUEST]: state => (
     {
       ...state,
       isAvailable: false,
       isRequest: true,
       isFailure: false,
       error: null,
+    }
+  ),
+  [SET_CURRENT_REGION]: (state, action) => (
+    {
+      ...state,
+      currentRegion: action.payload.data,
     }
   ),
 }, defaultState);

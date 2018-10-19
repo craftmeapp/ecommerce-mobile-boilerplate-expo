@@ -22,6 +22,7 @@ const reducer = handleActions({
       isAvailable: true,
       isRequest: false,
       isFailure: false,
+      error: null,
     }
   ),
   [READ_CATALOG_FAILURE]: (state, action) => (
@@ -39,6 +40,7 @@ const reducer = handleActions({
       isAvailable: false,
       isRequest: true,
       isFailure: false,
+      error: null,
     }
   ),
 }, defaultState);
