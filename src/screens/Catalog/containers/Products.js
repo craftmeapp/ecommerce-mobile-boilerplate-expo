@@ -5,6 +5,8 @@ import Products from '../components/Products';
 import { productsByCategoriesSelector } from '../../../selectors/products';
 
 const mapStateToProps = state => ({
+  regions: state.regions,
+  prices: state.prices,
   products: state.products,
   productsByCategories: productsByCategoriesSelector(state),
 });

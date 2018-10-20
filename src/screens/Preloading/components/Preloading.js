@@ -4,6 +4,7 @@ import { Spinner, Button, Picker, Icon } from 'native-base';
 import { Text } from 'react-native';
 import Notification from '../../../components/Notification';
 import { LOGIN } from '../../../constants';
+import { fetchPrices } from '../../../actions/prices';
 
 const PreloadingContainerStyled = styled.View`
   flex: 1;
@@ -42,11 +43,12 @@ export default class Preloading extends Component {
   }
 
   fetchInitRequests = () => {
-    const { fetchCatalog, fetchProducts, fetchRegions } = this.props;
+    const { fetchCatalog, fetchProducts, fetchRegions, fetchPrices } = this.props;
 
     fetchCatalog({ login: LOGIN });
     fetchProducts({ login: LOGIN });
     fetchRegions({ login: LOGIN });
+    fetchPrices({ login: LOGIN });
   }
 
   renderRedirect = () => {

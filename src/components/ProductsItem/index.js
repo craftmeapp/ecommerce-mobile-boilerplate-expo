@@ -39,7 +39,7 @@ export default class Item extends Component {
   }
 
   render() {
-    const { title, id, size } = this.props;
+    const { title, id, size, cost } = this.props;
 
     return (
       <TouchableOpacity onPress={this.handleClick}>
@@ -54,7 +54,7 @@ export default class Item extends Component {
               </TextStyled>
             </View>
             <View style={{flex: 1}}>
-              <TextStyled>219 р.</TextStyled>
+              <TextStyled>{cost} р.</TextStyled>
             </View>
           </ItemContentContainerStyled>
         </ItemContainerStyled>

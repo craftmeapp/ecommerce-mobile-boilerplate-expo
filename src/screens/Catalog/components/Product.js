@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import { Image } from 'react-native';
+import { Image, Text } from 'react-native';
 import { getProductImageURL } from '../../../utils/misc';
 import { LOGIN } from '../../../constants';
 
@@ -25,6 +25,16 @@ const ProductDescriptionStyled = styled.View`
 
 const ProoductControlContainerStyled = styled.View`
   flex: 1;
+  flex-direction: row;
+`;
+
+const ProductPriceContainerStyled = styled.View`
+  flex: 1;
+  flex-direction: column;
+`;
+
+const ProductAmountContainerStyled = styled.View`
+  flex: 2;
 `;
 
 export default class Product extends Component {
@@ -40,7 +50,7 @@ export default class Product extends Component {
     if (!products)
       return null;
 
-    const product = products.items.find(item => parseInt(item.id) === parseInt(this.currentProductId));
+    product = products.items.find(item => parseInt(item.id) === parseInt(this.currentProductId));
 
     if (!product)
       return null;
@@ -48,8 +58,15 @@ export default class Product extends Component {
     return product;
   }
 
+  getPrice() {
+    const { prices, regions } = this.props;
+
+    return prices.items.find(price => (price.dish === this.currentProductId && price.region === regions.currentRegion));
+  }
+
   render() {
-    const product = this.getProduct();
+    const product = this.getProduct(),
+      prices = this.getPrice();
 
     if (!product)
       return null;
@@ -67,7 +84,17 @@ export default class Product extends Component {
           </TextStyled>
         </ProductDescriptionStyled>
         <ProoductControlContainerStyled>
+          <ProductPriceContainerStyled>
+            <Text>
+              сумма:
+            </Text>
+            <Text>
+              {prices.cost}
+            </Text>
+          </ProductPriceContainerStyled>
+          <ProductAmountContainerStyled>
 
+          </ProductAmountContainerStyled>
         </ProoductControlContainerStyled>
       </ProductStyled>
     );

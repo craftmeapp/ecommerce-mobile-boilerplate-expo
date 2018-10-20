@@ -5,6 +5,8 @@ import Product from '../components/Product';
 
 const mapStateToProps = state => ({
   products: state.products,
+  prices: state.prices,
+  regions: state.regions,
 });
 
 const mapDispatchToProps = dispatch => ({
