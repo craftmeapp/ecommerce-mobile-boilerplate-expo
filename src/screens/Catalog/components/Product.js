@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import { Image, Text } from 'react-native';
+import { Button, Icon } from 'native-base';
+import { View, Text } from 'react-native';
 import { getProductImageURL } from '../../../utils/misc';
 import { LOGIN } from '../../../constants';
 
@@ -35,6 +36,12 @@ const ProductPriceContainerStyled = styled.View`
 
 const ProductAmountContainerStyled = styled.View`
   flex: 2;
+  flex-direction: row;
+`;
+
+const ProductAmountTextContainer = styled.View`
+  flex: 1;
+  flex-direction: column;
 `;
 
 export default class Product extends Component {
@@ -42,6 +49,10 @@ export default class Product extends Component {
     super(props);
 
     this.currentProductId = props.navigation.getParam('product');
+
+    this.state = {
+      amount: this.getAmount(),
+    };
   }
 
   getProduct() {
@@ -64,10 +75,52 @@ export default class Product extends Component {
     return prices.items.find(price => (price.dish === this.currentProductId && price.region === regions.currentRegion));
   }
 
-  render() {
-    const product = this.getProduct(),
-      prices = this.getPrice();
+  getAmount() {
+    const { cart } = this.props;
 
+    const product = cart.items.find(item => item.id === this.currentProductId);
+
+    if (product)
+      return product.amount;
+
+    return 0;
+  }
+
+  handleMinusProductToCart = () => {
+    const { amount } = this.state;
+
+    if (amount > 0)
+      this.setState({ amount: amount - 1 });
+  }
+
+  handlePlusProductToCart = () => {
+    const { amount } = this.state;
+
+    this.setState({ amount: amount + 1 });
+  }
+
+  handleAddProductToCart = () => {
+    const { addProductToCart, removeProductFromCart, navigation } = this.props;
+    const { amount } = this.state;
+
+    const id = this.currentProductId;
+
+    if (amount)
+      addProductToCart({ id, amount });
+    else
+      removeProductFromCart({ id });
+
+    navigation.goBack();
+  }
+
+  render() {
+    const { amount } = this.state,
+      { cart } = this.props;
+
+    const product = this.getProduct(),
+      price = this.getPrice();
+
+    console.log(cart);
     if (!product)
       return null;
 
@@ -89,11 +142,31 @@ export default class Product extends Component {
               сумма:
             </Text>
             <Text>
-              {prices.cost}
+              {price.cost}
             </Text>
           </ProductPriceContainerStyled>
           <ProductAmountContainerStyled>
-
+            <Button transparent primary onPress={this.handleMinusProductToCart}>
+              <Icon fontSize="40" type="Feather" name="minus-square" />
+            </Button>
+            <ProductAmountTextContainer>
+              <View>
+                <Text>{amount}</Text>
+              </View>
+              <View>
+                <Text>
+                  шт.
+                </Text>
+              </View>
+            </ProductAmountTextContainer>
+            <Button transparent primary onPress={this.handlePlusProductToCart}>
+              <Icon fontSize="30" type="Feather" name="plus-square" />
+            </Button>
+            <Button onPress={this.handleAddProductToCart}>
+              <Text>
+                Добавить
+              </Text>
+            </Button>
           </ProductAmountContainerStyled>
         </ProoductControlContainerStyled>
       </ProductStyled>
