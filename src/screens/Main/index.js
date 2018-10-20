@@ -9,9 +9,6 @@ export default createBottomTabNavigator(
     Catalog: {
       screen: Catalog,
     },
-    About: {
-      screen: About,
-    },
     Cart: {
       screen: Cart,
     },
@@ -27,11 +24,7 @@ export default createBottomTabNavigator(
               <Icon name="menu" />
               <Text>Меню</Text>
             </Button>
-            <Button vertical active={props.navigation.state.index === 1} onPress={() => props.navigation.navigate('About')}>
-              <Icon name="home" />
-              <Text>О нас</Text>
-            </Button>
-            <Button vertical active={props.navigation.state.index === 2} onPress={() => props.navigation.navigate('Cart')}>
+            <Button vertical active={props.navigation.state.index === 1} onPress={() => props.navigation.navigate('Cart')}>
               <Icon active name="basket"/>
               <Text>Корзина</Text>
             </Button>
