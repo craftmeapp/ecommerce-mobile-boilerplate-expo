@@ -14,19 +14,18 @@ const onRecievePricesSuccess = ({ data }) => ({
 
 const onRecievePricesFailure = ({ error }) => ({
   error,
-})
+});
 
 const fetchPricesSuccess = createAction(READ_PRICES_SUCCESS, onRecievePricesSuccess);
 const fetchPricesFailure = createAction(READ_PRICES_FAILURE, onRecievePricesFailure);
 const fetchPricesRequest = createAction(READ_PRICES_REQUEST);
 
 export const fetchPrices = ({ login }) =>
-  dispatch => {
+  (dispatch) => {
     dispatch(fetchPricesRequest());
 
     recievePrices({ login })
       .then(data => dispatch(fetchPricesSuccess({ data })))
       .catch(error => dispatch(fetchPricesFailure({ error })));
   };
-
 

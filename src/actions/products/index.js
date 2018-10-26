@@ -14,19 +14,18 @@ const onRecieveProductsSuccess = ({ data }) => ({
 
 const onRecieveProductsFailure = ({ error }) => ({
   error,
-})
+});
 
 const fetchProductsSuccess = createAction(READ_PRODUCTS_SUCCESS, onRecieveProductsSuccess);
 const fetchProductsFailure = createAction(READ_PRODUCTS_FAILURE, onRecieveProductsFailure);
 const fetchProductsRequest = createAction(READ_PRODUCTS_REQUEST);
 
 export const fetchProducts = ({ login }) =>
-  dispatch => {
+  (dispatch) => {
     dispatch(fetchProductsRequest());
 
     recieveProducts({ login })
       .then(data => dispatch(fetchProductsSuccess({ data })))
       .catch(error => dispatch(fetchProductsFailure({ error })));
   };
-
 

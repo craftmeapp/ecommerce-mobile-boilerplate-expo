@@ -12,24 +12,23 @@ const defaultState = {
 const addProductToCart = ({ id, amount }, state) => {
   let isUpdate = false;
 
-  const items = state.items.map(item => {
+  const items = state.items.map((item) => {
     if (item.id === id) {
       isUpdate = true;
       return { id, amount };
     }
 
     return { ...item };
-  })
+  });
 
-  if (isUpdate)
+  if (isUpdate) {
     return items;
+  }
 
   return items.concat({ id, amount });
-}
+};
 
-const removeProductFromCart = ({ id }, state) => {
-  return state.items.filter(item => item.id !== id);
-}
+const removeProductFromCart = ({ id }, state) => state.items.filter(item => item.id !== id);
 
 const reducer = handleActions({
   [ADD_PRODUCT_TO_CART]: (state, action) => (

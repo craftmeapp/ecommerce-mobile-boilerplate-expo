@@ -11,7 +11,7 @@ export default function configureStore(initialState) {
   const store = createStore(
     rootReducer,
     initialState,
-    compose(applyMiddleware(...middleware))
+    compose(applyMiddleware(...middleware)),
   );
 
   return store;

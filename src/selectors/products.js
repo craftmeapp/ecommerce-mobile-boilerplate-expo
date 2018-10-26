@@ -1,4 +1,4 @@
-import { createSelector } from 'reselect'
+import { createSelector } from 'reselect';
 
 const productsSelector = state => state.products.items;
 
@@ -8,14 +8,15 @@ export const productsByCategoriesSelector = createSelector(
     const result = {};
 
     products.forEach(product => {
-      const categoryId = parseInt(product.category);
+      const categoryId = parseInt(product.category, 10);
 
-      if (result[categoryId])
+      if (result[categoryId]) {
         result[categoryId].push(product);
-      else
+      } else {
         result[categoryId] = [product];
+      }
     });
 
     return result;
-  }
+  },
 );

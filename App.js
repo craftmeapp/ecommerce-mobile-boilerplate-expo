@@ -16,7 +16,7 @@ const RootStack = createSwitchNavigator(
   },
   {
     initialRouteName: 'Preloading',
-  }
+  },
 );
 
 const store = configureStore();

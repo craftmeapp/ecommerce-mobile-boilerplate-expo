@@ -13,9 +13,9 @@ export default createStackNavigator(
     },
     Product: {
       screen: Product,
-    }
+    },
   },
   {
     initialRouteName: 'Catalog',
-  }
+  },
 );

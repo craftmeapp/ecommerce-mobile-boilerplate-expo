@@ -120,7 +120,6 @@ export default class Product extends Component {
     const product = this.getProduct(),
       price = this.getPrice();
 
-    console.log(cart);
     if (!product)
       return null;
 

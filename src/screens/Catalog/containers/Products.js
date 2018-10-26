@@ -14,7 +14,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   ...bindActionCreators(
     actions,
-    dispatch
+    dispatch,
   ),
 });
 

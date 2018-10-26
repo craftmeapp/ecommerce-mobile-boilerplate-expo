@@ -15,14 +15,14 @@ const onRecieveRegionsSuccess = ({ data }) => ({
 
 const onRecieveRegionsFailure = ({ error }) => ({
   error,
-})
+});
 
 const fetchRegionsSuccess = createAction(READ_REGIONS_SUCCESS, onRecieveRegionsSuccess);
 const fetchRegionsFailure = createAction(READ_REGIONS_FAILURE, onRecieveRegionsFailure);
 const fetchRegionsRequest = createAction(READ_REGIONS_REQUEST);
 
 export const fetchRegions = ({ login }) =>
-  dispatch => {
+  (dispatch) => {
     dispatch(fetchRegionsRequest());
 
     recieveRegions({ login })

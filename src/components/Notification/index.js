@@ -7,7 +7,7 @@ export default class Notification extends React.Component {
 
     this.state = {
       fadeAnim: new Animated.Value(0),
-    }
+    };
   }
 
   componentDidMount() {
@@ -23,7 +23,7 @@ export default class Notification extends React.Component {
         {
           toValue: 100,
           duration: 1000,
-        }
+        },
       ),
       Animated.timing(
         this.state.fadeAnim,
@@ -31,19 +31,21 @@ export default class Notification extends React.Component {
           delay: 2000,
           toValue: 0,
           duration: 1000,
-        }
-      )
+        },
+      ),
     ]);
   }
 
   getBackgroundColor() {
     const { type } = this.props;
 
-    if (type === 'error')
+    if (type === 'error') {
       return 'tomato';
-    
-    if (type === 'warning')
+    }
+
+    if (type === 'warning') {
       return 'yellow';
+    }
 
     return 'limegreen';
   }
@@ -62,7 +64,7 @@ export default class Notification extends React.Component {
           position: 'absolute',
           height: 100,
           backgroundColor: this.getBackgroundColor(),
-          transform: [{translateY: fadeAnim}],
+          transform: [{ translateY: fadeAnim }],
         }}
       >
         {this.props.children}

@@ -14,19 +14,18 @@ const onRecieveCatalogsSuccess = ({ data }) => ({
 
 const onRecieveCatalogsFailure = ({ error }) => ({
   error,
-})
+});
 
 const fetchCatalogsSuccess = createAction(READ_CATALOG_SUCCESS, onRecieveCatalogsSuccess);
 const fetchCatalogsFailure = createAction(READ_CATALOG_FAILURE, onRecieveCatalogsFailure);
 const fetchCatalogsRequest = createAction(READ_CATALOG_REQUEST);
 
 export const fetchCatalog = ({ login }) =>
-  dispatch => {
+  (dispatch) => {
     dispatch(fetchCatalogsRequest());
 
     recieveCatalog({ login })
       .then(data => dispatch(fetchCatalogsSuccess({ data })))
       .catch(error => dispatch(fetchCatalogsFailure({ error })));
   };
-
 
