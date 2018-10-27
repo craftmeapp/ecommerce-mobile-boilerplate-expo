@@ -13,7 +13,14 @@ export default class Cart extends Component {
       const product = products.items.find(findProduct => findProduct.id === item.id);
 
       return (
-        <CartItem key={item.id} title={product.title} amount={item.amount} onPress={() => {}} />
+        <CartItem
+          key={item.id}
+          index={item.id}
+          title={product.title}
+          amount={item.amount}
+          onPress={this.handlePress}
+          onRemove={this.handleRemove}
+        />
       );
     });
 
@@ -22,6 +29,15 @@ export default class Cart extends Component {
         {items}
       </List>
     );
+  }
+
+  handlePress = ({ index }) => {
+
+  }
+
+  handleRemove = ({ index }) => {
+    const { removeProductFromCart } = this.props;
+    removeProductFromCart({ id: index });
   }
 
   render() {

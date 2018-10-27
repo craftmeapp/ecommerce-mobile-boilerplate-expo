@@ -13,15 +13,25 @@ const AmountContainer = styled.View`
   flex: 1;
 `;
 
-var swipeoutBtns = [
-  {
-    text: 'Удалить',
-    backgroundColor: 'red',
-  },
-];
-
 export default class Item extends Component {
-  handleClick = () => {
+  constructor(props) {
+    super(props);
+
+    this.swipeoutBtns = [
+      {
+        text: 'Удалить',
+        backgroundColor: 'red',
+        onPress: this.handleRemove,
+      },
+    ];
+  }
+
+  handleRemove = () => {
+    const { index, onRemove } = this.props;
+    onRemove({ index });
+  }
+
+  handlePress = () => {
     const { index, onPress } = this.props;
     onPress({ index });
   }
@@ -30,8 +40,8 @@ export default class Item extends Component {
     const { title, amount } = this.props;
 
     return (
-      <Swipeout right={swipeoutBtns} scroll={() => false}>
-        <ListItem button onPress={this.handleClick}>
+      <Swipeout right={this.swipeoutBtns}>
+        <ListItem button onPress={this.handlePress}>
           <TitleContainer>
             <TextStyled>
               {title}
