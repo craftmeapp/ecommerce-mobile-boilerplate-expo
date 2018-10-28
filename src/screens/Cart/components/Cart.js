@@ -32,7 +32,8 @@ export default class Cart extends Component {
   }
 
   handlePress = ({ index }) => {
-
+    const { navigation } = this.props;
+    navigation.navigate('ProductPreview', { product: index });
   }
 
   handleRemove = ({ index }) => {
@@ -45,7 +46,6 @@ export default class Cart extends Component {
 
     return (
       <Fragment>
-        <Header />
         <Content>
           {items}
         </Content>
