@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { ListItem, Icon, Button } from 'native-base';
+import { ListItem, Icon } from 'native-base';
 import styled from 'styled-components';
 import Swipeout from 'react-native-swipeout';
 

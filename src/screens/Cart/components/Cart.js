@@ -1,9 +1,23 @@
 import React, { Component, Fragment } from 'react';
-import { Content, Header, List } from 'native-base';
+import { Button, List } from 'native-base';
 import styled from 'styled-components';
 import CartItem from '../../../components/CartItem';
 
 const TextStyled = styled.Text``;
+
+const SummaryStyled = styled.View`
+  flex: 1;
+  justifyContent: center;
+  alignItems: center;
+  flex-direction: column;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+`;
+
+const ContentStyled = styled.View`
+  padding-bottom: 100;
+`;
 
 export default class Cart extends Component {
   renderItems() {
@@ -41,14 +55,28 @@ export default class Cart extends Component {
     removeProductFromCart({ id: index });
   }
 
+  renderSummary() {
+    const { total } = this.props;
+
+    return (
+      <SummaryStyled>
+        <Button full success onPress={this.handleConfirmRegion}>
+          <TextStyled>
+            Оформить на сумму {total} руб.
+          </TextStyled>
+        </Button>
+      </SummaryStyled>
+    );
+  }
+
   render() {
-    const items = this.renderItems();
+    const items = this.renderItems(),
+      summary = this.renderSummary();
 
     return (
       <Fragment>
-        <Content>
-          {items}
-        </Content>
+        {items}
+        {summary}
       </Fragment>
     );
   }
